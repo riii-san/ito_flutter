@@ -9,7 +9,7 @@ List<userInfo> _itemUser = <userInfo>[];
 // ignore: camel_case_types
 class userInfo{
 
-  final int userId;
+  int userId;
   final String userName;
 
   userInfo(
@@ -17,7 +17,7 @@ class userInfo{
       this.userName,
       );
 
-  Widget returnUserWidget(){
+  Widget returnUserWidget(void Function(int,String) userRemove){
     return Column(
       children: <Widget>[
         Row(
@@ -45,8 +45,7 @@ class userInfo{
                         primary: Colors.grey
                     ),
                     onPressed: (){
-                      // TODO : リストからユーザ削除、再描画
-                      _itemUser.removeAt(userId);
+                      userRemove(this.userId,this.userName);
                     },
                     child: Icon(Icons.cancel_rounded,color: Colors.white,)
                 ),
@@ -58,7 +57,6 @@ class userInfo{
       ],
     );
   }
-
 
 }
 
@@ -81,6 +79,16 @@ class _gameStartPageState extends State<gameStartPage> {
   // ユーザ追加テキストボックス内の文字を把握するコントローラー
   final valueUserNameController = TextEditingController();
 
+  void userRemove(int userId,String userName){
+    _itemUser.removeAt(userId);
+    _userNameList.remove(userName);
+    // TODO : foreach且つアロー演算子で記述する
+    for(int i = 0; i < _itemUser.length; i++){
+      _itemUser[i].userId = i;
+    }
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -98,7 +106,7 @@ class _gameStartPageState extends State<gameStartPage> {
                       child: TextFormField(
                         controller: valueUserNameController,
                         decoration: InputDecoration(
-                          hintText: 'add user',
+                          hintText: 'add user name',
                           prefixIcon: Icon(
                             Icons.person,
                           ),
@@ -157,7 +165,7 @@ class _gameStartPageState extends State<gameStartPage> {
                       scrollDirection: Axis.vertical, // ListViewを縦方向にスクロール可能にするパラメータ
                       shrinkWrap: true,               // ListViewをColumn内で使用するために必要なパラメータ
                       itemBuilder: (BuildContext context, int index){
-                        return _itemUser[index].returnUserWidget();
+                        return _itemUser[index].returnUserWidget(userRemove);
                       },
                       itemCount: _itemUser.length,
                     ),
@@ -182,16 +190,32 @@ class _gameStartPageState extends State<gameStartPage> {
                       ),
                     ),
                     // STARTボタン
-                    SizedBox(
-                      width: 150,
-                      child: ElevatedButton(onPressed: (){
-                        Navigator.pop(context);
-                      },
-                        child: Text(
-                            'START'
+                    // ユーザが4人以上参加した場合のみゲームを開始するようにする
+                    if(_itemUser.length > 3)
+                      SizedBox(
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                              'START'
+                          ),
                         ),
-                      ),
-                    ),
+                      )
+                    else
+                      SizedBox(
+                        width: 150,
+                        child: ElevatedButton(
+                          onPressed: null,
+                          style: ElevatedButton.styleFrom(
+                              primary: Colors.black12
+                          ),
+                          child: Text(
+                              'START'
+                          ),
+                        ),
+                      )
                   ],
                 )
               ]
