@@ -22,16 +22,35 @@ class _userCheckNumberState extends State<userCheckNumber>  {
 
   @override
   void initState() {
+
+    int tempNum;
+    bool dupFlg = false;
+    List<int> _userNoList = <int>[];
+
     // 初回のみ各ユーザの数値とカードのパスを渡す
     if(widget._gameMaster.orderNo == 0){
       super.initState();
+
       widget._itemUser.forEach((element) {
         // 1~100までの数字を格納
-        element.cardNo = math.Random().nextInt(100)+1;
+        // 重複の場合は再度番号発行
+        while(!dupFlg){
+          tempNum = math.Random().nextInt(4)+1;
+          // 重複がない場合リストに追加
+          if(!_userNoList.contains(tempNum)){
+            _userNoList.add(tempNum);
+            dupFlg = true;
+          }
+        }
+        // 重複しない数字を指定
+        element.cardNo = tempNum;
         // 割り当てた数字を元にカードのパスを指定
         element.cardURL = userInfo.returnCardNumPath(element.cardNo);
+        // 重複フラグクリア
+        dupFlg = false;
       });
     }
+    // カードタップフラグクリア
     tapFlag = true;
   }
 
@@ -51,12 +70,12 @@ class _userCheckNumberState extends State<userCheckNumber>  {
               ),
             ),
             returnCard(widget._itemUser[widget._gameMaster.orderNo].cardURL),
-            // TODO : 各ページの履歴を消す
             if(widget._gameMaster.orderNo + 1 == widget._itemUser.length)
               SizedBox(
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
+                    widget._gameMaster.orderNo = 0;
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(

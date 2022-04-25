@@ -25,6 +25,7 @@ class _openKeywordState extends State<openKeyword> {
           children: <Widget>[
             Row(
               children: <Widget>[
+                SizedBox(width: 10,),
                 for(int i = 0; i < widget._gameMaster.life; i++)
                   Container(padding: EdgeInsets.all(2), child: Text('❤︎', style: TextStyle(color: Colors.red))),
               ],

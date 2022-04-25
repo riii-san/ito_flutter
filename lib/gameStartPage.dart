@@ -6,7 +6,8 @@ import 'package:ito/userCheckNumber.dart';
 // ゲーム参加ユーザが格納されているリスト
 // TODO : グローバル宣言でも良いのか
 List<userInfo> _itemUser = <userInfo>[];
-gameMaster _gameMaster;
+// ユーザがカードをめくる番号、問題番号、残りライフ
+gameMaster _gameMaster = gameMaster(0,1,3);
 
 // ignore: camel_case_types, must_be_immutable
 class gameStartPage extends StatefulWidget {
