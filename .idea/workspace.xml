@@ -26,19 +26,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa3c8001-2270-480b-bb04-526b8031097e" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/userInfo.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/gameMaster.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/.filecache" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/.filecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/app.dill" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/app.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/debug_ios_bundle_flutter_assets.stamp" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/debug_ios_bundle_flutter_assets.stamp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/flutter_assets.d" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/flutter_build/4f4add03b4573aead2850d4494ab923d/flutter_assets.d" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI.numbers" beforeDir="false" afterPath="$PROJECT_DIR$/UI.numbers" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" beforeDir="false" afterPath="$PROJECT_DIR$/build/f872507f30e2ff2523f0f1d19160266e.cache.dill.track.dill" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/Debug-iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/App" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/_CodeSignature/CodeResources" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Frameworks/App.framework/flutter_assets/kernel_blob.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/Runner" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" beforeDir="false" afterPath="$PROJECT_DIR$/build/ios/iphonesimulator/Runner.app/_CodeSignature/CodeResources" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/gameStartPage.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/gameStartPage.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/openKeyword.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/openKeyword.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/userCheckNumber.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/userCheckNumber.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,11 +122,6 @@
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
-  <component name="VcsManagerConfiguration">
-    <ignored-roots>
-      <path value="$PROJECT_DIR$" />
-    </ignored-roots>
-  </component>
   <component name="WindowStateProjectService">
     <state x="-1820" y="164" width="1720" height="880" key="AVDManager" timestamp="1650877191434">
       <screen x="-1920" y="64" width="1920" height="1080" />
@@ -134,31 +137,31 @@
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
     <state width="444" height="466" key="DebuggerActiveHint/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650546347799" />
-    <state width="1344" height="305" key="GridCell.Tab.0.bottom" timestamp="1650879052139">
+    <state width="1344" height="305" key="GridCell.Tab.0.bottom" timestamp="1650883215614">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
-    <state width="1344" height="305" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879052139" />
+    <state width="1344" height="305" key="GridCell.Tab.0.bottom/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650883215614" />
     <state width="1344" height="305" key="GridCell.Tab.0.bottom/0.23.1440.823/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879007922" />
-    <state width="1344" height="305" key="GridCell.Tab.0.center" timestamp="1650879052137">
+    <state width="1344" height="305" key="GridCell.Tab.0.center" timestamp="1650883215613">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
-    <state width="1344" height="305" key="GridCell.Tab.0.center/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879052137" />
+    <state width="1344" height="305" key="GridCell.Tab.0.center/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650883215613" />
     <state width="1344" height="305" key="GridCell.Tab.0.center/0.23.1440.823/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879007920" />
-    <state width="1344" height="305" key="GridCell.Tab.0.left" timestamp="1650879052137">
+    <state width="1344" height="305" key="GridCell.Tab.0.left" timestamp="1650883215612">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
-    <state width="1344" height="305" key="GridCell.Tab.0.left/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879052137" />
+    <state width="1344" height="305" key="GridCell.Tab.0.left/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650883215612" />
     <state width="1344" height="305" key="GridCell.Tab.0.left/0.23.1440.823/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879007919" />
-    <state width="1344" height="305" key="GridCell.Tab.0.right" timestamp="1650879052138">
+    <state width="1344" height="305" key="GridCell.Tab.0.right" timestamp="1650883215613">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
-    <state width="1344" height="305" key="GridCell.Tab.0.right/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879052138" />
+    <state width="1344" height="305" key="GridCell.Tab.0.right/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650883215613" />
     <state width="1344" height="305" key="GridCell.Tab.0.right/0.23.1440.823/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879007921" />
-    <state x="-1459" y="243" key="SettingsEditor" timestamp="1650878743593">
+    <state x="-1459" y="243" key="SettingsEditor" timestamp="1650879992847">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>
     <state x="-1459" y="243" key="SettingsEditor/0.0.1440.900/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650877178130" />
-    <state x="-1459" y="243" key="SettingsEditor/0.23.1440.877/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650878743593" />
+    <state x="-1459" y="243" key="SettingsEditor/0.23.1440.877/-1920.64.1920.1080@-1920.64.1920.1080" timestamp="1650879992847" />
     <state width="696" height="540" key="XDebugger.FullValuePopup" timestamp="1650877018535">
       <screen x="-1920" y="64" width="1920" height="1080" />
     </state>

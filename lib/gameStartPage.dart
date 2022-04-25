@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:ito/userInfo.dart';
+import 'package:ito/gameMaster.dart';
 import 'package:ito/userCheckNumber.dart';
 
 // ゲーム参加ユーザが格納されているリスト
 // TODO : グローバル宣言でも良いのか
 List<userInfo> _itemUser = <userInfo>[];
+gameMaster _gameMaster;
 
 // ignore: camel_case_types, must_be_immutable
 class gameStartPage extends StatefulWidget {
@@ -142,9 +144,9 @@ class _gameStartPageState extends State<gameStartPage> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: (){
-
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => userCheckNumber(_itemUser,0)
+                                // 引数 : ユーザリスト、ユーザ番号(orderNo)、問題番号、残り体力
+                                builder: (context) => userCheckNumber(_itemUser,_gameMaster)
                             ));
 
                           },

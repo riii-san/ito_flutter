@@ -2,15 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:ito/userInfo.dart';
+import 'package:ito/gameMaster.dart';
 import 'package:ito/openKeyword.dart';
 import 'dart:math' as math;
 
 // ユーザ追加画面と次の問題に移行する時に呼ばれるコンストラクタ
 // ignore: camel_case_types, must_be_immutable
 class userCheckNumber extends StatefulWidget{
-  userCheckNumber(this._itemUser,this.orderNo);
+  userCheckNumber(this._itemUser,this._gameMaster);
   List<userInfo> _itemUser;
-  int orderNo; // 何回目の番号チェックかを表す変数 (0からスタート)
+  gameMaster _gameMaster;
 
   @override
   State<StatefulWidget> createState() => _userCheckNumberState();
@@ -22,14 +23,13 @@ class _userCheckNumberState extends State<userCheckNumber>  {
   @override
   void initState() {
     // 初回のみ各ユーザの数値とカードのパスを渡す
-    if(widget.orderNo == 0){
+    if(widget._gameMaster.orderNo == 0){
       super.initState();
       widget._itemUser.forEach((element) {
         // 1~100までの数字を格納
         element.cardNo = math.Random().nextInt(100)+1;
         // 割り当てた数字を元にカードのパスを指定
         element.cardURL = userInfo.returnCardNumPath(element.cardNo);
-        print(element.cardNo);
       });
     }
     tapFlag = true;
@@ -44,24 +44,23 @@ class _userCheckNumberState extends State<userCheckNumber>  {
           children: <Widget>[
             Text(
               //_itemUser[orderNo].userName.toString(),
-              widget._itemUser[widget.orderNo].userName,
+              widget._itemUser[widget._gameMaster.orderNo].userName,
               style: TextStyle(
                   fontSize: 30,
                   color: Colors.grey
               ),
             ),
-            returnCard(widget._itemUser[widget.orderNo].cardURL),
+            returnCard(widget._itemUser[widget._gameMaster.orderNo].cardURL),
             // TODO : 各ページの履歴を消す
-            if(widget.orderNo + 1 == widget._itemUser.length)
+            if(widget._gameMaster.orderNo + 1 == widget._itemUser.length)
               SizedBox(
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
-                    // TODO : お題の画面へ(push)
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => openKeyword(widget._itemUser)
+                            builder: (context) => openKeyword(widget._itemUser,widget._gameMaster)
                         )
                     );
                   },
@@ -73,10 +72,11 @@ class _userCheckNumberState extends State<userCheckNumber>  {
                 width: 150,
                 child: ElevatedButton(
                   onPressed: () {
+                    widget._gameMaster.orderNo += 1;
                     Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => userCheckNumber(widget._itemUser,widget.orderNo + 1)
+                          builder: (context) => userCheckNumber(widget._itemUser,widget._gameMaster)
                         )
                     );
                   },
