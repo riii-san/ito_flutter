@@ -1,69 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:ito/userInfo.dart';
 import 'package:ito/userCheckNumber.dart';
 
 // ゲーム参加ユーザが格納されているリスト
 // TODO : グローバル宣言でも良いのか
 List<userInfo> _itemUser = <userInfo>[];
-
-// ユーザ一人分の情報を持つクラス
-// 参加ユーザ分のインスタンスを生成
-// ignore: camel_case_types
-class userInfo{
-
-  int userId;
-  final String userName;
-  int cardNo;
-  String cardURL;
-
-  userInfo(
-      this.userId,
-      this.userName,
-      this.cardNo,
-      this.cardURL
-      );
-
-  Widget returnUserWidget(void Function(int,String) userRemove){
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Container(
-              width: 270,
-              height: 50,
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.grey)
-              ),
-              child: Text(
-                  userName,
-                  style: TextStyle(fontSize: 20)
-              ),
-            ),
-            Expanded(
-              child: SizedBox(
-                height: 25,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        shape: CircleBorder(),
-                        primary: Colors.grey
-                    ),
-                    onPressed: (){
-                      userRemove(this.userId,this.userName);
-                    },
-                    child: Icon(Icons.cancel_rounded,color: Colors.white,)
-                ),
-              ),
-            )
-          ],
-        ),
-        SizedBox(height: 5,)
-      ],
-    );
-  }
-
-}
 
 // ignore: camel_case_types, must_be_immutable
 class gameStartPage extends StatefulWidget {

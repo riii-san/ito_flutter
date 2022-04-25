@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:ito/gameStartPage.dart';
+import 'package:ito/userInfo.dart';
+import 'package:ito/openKeyword.dart';
 import 'dart:math' as math;
 
 // ユーザ追加画面と次の問題に移行する時に呼ばれるコンストラクタ
@@ -26,17 +27,12 @@ class _userCheckNumberState extends State<userCheckNumber>  {
       widget._itemUser.forEach((element) {
         // 1~100までの数字を格納
         element.cardNo = math.Random().nextInt(100)+1;
+        // 割り当てた数字を元にカードのパスを指定
+        element.cardURL = userInfo.returnCardNumPath(element.cardNo);
+        print(element.cardNo);
       });
-      // TODO : 数字によって表カードを変更する
-      widget._itemUser[0].cardURL = 'images/card_club.png';
-      widget._itemUser[1].cardURL = 'images/card_diamond.png';
-      widget._itemUser[2].cardURL = 'images/card_heart.png';
-      widget._itemUser[3].cardURL = 'images/card_spade.png';
     }
     tapFlag = true;
-
-    print(widget._itemUser.length);
-    print(widget.orderNo);
   }
 
   @override
@@ -62,9 +58,14 @@ class _userCheckNumberState extends State<userCheckNumber>  {
                 child: ElevatedButton(
                   onPressed: () {
                     // TODO : お題の画面へ(push)
-                    Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => openKeyword(widget._itemUser)
+                        )
+                    );
                   },
-                  child: Text('FINISH'),
+                  child: Text('OPEN QUESTION'),
                 ),
               )
             else
