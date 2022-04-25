@@ -12,7 +12,6 @@ class mainForm extends StatelessWidget{
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Image.asset('images/ito.png'),
-            //Text('ito' , style: TextStyle(fontWeight: FontWeight.normal, fontSize: 80, color: Colors.blue),),
             SizedBox(height: 60,),
             SizedBox(
               width: 200,

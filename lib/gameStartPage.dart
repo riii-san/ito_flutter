@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ito/userCheckNumber.dart';
 
 // ゲーム参加ユーザが格納されているリスト
 // TODO : グローバル宣言でも良いのか
@@ -11,10 +12,14 @@ class userInfo{
 
   int userId;
   final String userName;
+  int cardNo;
+  String cardURL;
 
   userInfo(
       this.userId,
       this.userName,
+      this.cardNo,
+      this.cardURL
       );
 
   Widget returnUserWidget(void Function(int,String) userRemove){
@@ -130,7 +135,7 @@ class _gameStartPageState extends State<gameStartPage> {
                           onPressed: (){
                             // ユーザ名がnull且つユーザリストにある名前でない場合にゲーム参加リストに追加
                             if (valueUserNameController.text.isNotEmpty && !_userNameList.contains(valueUserNameController.text)) {
-                              _itemUser.add(new userInfo(_itemUser.length, valueUserNameController.text));
+                              _itemUser.add(new userInfo(_itemUser.length, valueUserNameController.text, null,null));
                               _userNameList.add(valueUserNameController.text);
                               setState(() {});
                             }
@@ -196,7 +201,11 @@ class _gameStartPageState extends State<gameStartPage> {
                         width: 150,
                         child: ElevatedButton(
                           onPressed: (){
-                            Navigator.pop(context);
+
+                            Navigator.push(context, MaterialPageRoute(
+                                builder: (context) => userCheckNumber(_itemUser,0)
+                            ));
+
                           },
                           child: Text(
                               'START'

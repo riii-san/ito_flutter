@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ito/mainForm.dart';
 
-import 'gameStartPage.dart';
-
 void main() {
   runApp(MyApp());
 }
