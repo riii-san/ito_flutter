@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:ito/userInfo.dart';
 import 'package:ito/gameMaster.dart';
 import 'package:ito/userCheckNumber.dart';
+import 'config.dart';
+
 
 // ゲーム参加ユーザが格納されているリスト
 // TODO : グローバル宣言でも良いのか
@@ -40,56 +42,61 @@ class _gameStartPageState extends State<gameStartPage> {
 
   @override
   Widget build(BuildContext context) {
+    config _config = new config(context);
     return Scaffold(
         body : Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    // add user テキストフィールド
-                    Container(
-                      width: 300,
-                      height: 50,
-                      child: TextFormField(
-                        controller: valueUserNameController,
-                        decoration: InputDecoration(
-                          hintText: 'add user name',
-                          prefixIcon: Icon(
-                            Icons.person,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(32),
-                            borderSide: BorderSide(
-                                color: Colors.grey,
-                                width: 2.0
+                Container(
+                  height: _config.deviceHeight * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      // add user テキストフィールド
+                      Container(
+                        width: _config.deviceWidth * 0.7,
+                        child: TextFormField(
+                          controller: valueUserNameController,
+                          decoration: InputDecoration(
+                            hintText: 'add user name',
+                            prefixIcon: Icon(
+                              Icons.person,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(32),
+                              borderSide: BorderSide(
+                                  color: Colors.grey,
+                                  width: 2.0
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                    // プラスボタン
-                    SizedBox(
-                      height: 50,
-                      child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: CircleBorder(),
-                          ),
+                      // プラスボタン
+                      SizedBox(
+                        child: MaterialButton(
+                          height: _config.deviceHeight * 0.1,
+                          minWidth: _config.deviceWidth * 0.1,
                           onPressed: (){
-                            // ユーザ名がnull且つユーザリストにある名前でない場合にゲーム参加リストに追加
                             if (valueUserNameController.text.isNotEmpty && !_userNameList.contains(valueUserNameController.text)) {
                               _itemUser.add(new userInfo(_itemUser.length, valueUserNameController.text, null,null));
                               _userNameList.add(valueUserNameController.text);
                               setState(() {});
                             }
                           },
-                          child: Icon(Icons.add,)
-                      ),
-                    )
-                  ],
+                          color: Colors.blue,
+                          shape: CircleBorder(),
+                          child: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(height: 40,),
+                SizedBox(height: _config.deviceHeight * 0.025,),
                 // UserListテキスト
                 Text(
                   'User List',
@@ -100,8 +107,8 @@ class _gameStartPageState extends State<gameStartPage> {
                 ),
                 // UserList表示領域(スクロール可)
                 Container(
-                  width: 350,
-                  height: 500,
+                  width: _config.deviceWidth * 0.8,
+                  height: _config.deviceHeight * 0.55,
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey),
@@ -114,19 +121,19 @@ class _gameStartPageState extends State<gameStartPage> {
                       scrollDirection: Axis.vertical, // ListViewを縦方向にスクロール可能にするパラメータ
                       shrinkWrap: true,               // ListViewをColumn内で使用するために必要なパラメータ
                       itemBuilder: (BuildContext context, int index){
-                        return _itemUser[index].returnUserWidget(userRemove);
+                        return _itemUser[index].returnUserWidget(userRemove, _config);
                       },
                       itemCount: _itemUser.length,
                     ),
                   ),
                 ),
-                SizedBox(height: 40,),
+                SizedBox(height: _config.deviceHeight * 0.05,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: <Widget>[
                     // CANCELボタン
                     SizedBox(
-                      width: 150,
+                      width: _config.deviceWidth * 0.4,
                       child: ElevatedButton(onPressed: (){
                         Navigator.pop(context);
                       },
@@ -142,7 +149,7 @@ class _gameStartPageState extends State<gameStartPage> {
                     // ユーザが4人以上参加した場合のみゲームを開始するようにする
                     if(_itemUser.length > 3)
                       SizedBox(
-                        width: 150,
+                        width: _config.deviceWidth * 0.4,
                         child: ElevatedButton(
                           onPressed: (){
                             Navigator.push(context, MaterialPageRoute(
@@ -158,7 +165,7 @@ class _gameStartPageState extends State<gameStartPage> {
                       )
                     else
                       SizedBox(
-                        width: 150,
+                        width: _config.deviceWidth * 0.4,
                         child: ElevatedButton(
                           onPressed: null,
                           style: ElevatedButton.styleFrom(

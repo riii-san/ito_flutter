@@ -4,7 +4,10 @@ import 'package:flutter/rendering.dart';
 import 'package:ito/userInfo.dart';
 import 'package:ito/gameMaster.dart';
 import 'package:ito/openKeyword.dart';
+import 'config.dart';
 import 'dart:math' as math;
+
+config _config;
 
 // ユーザ追加画面と次の問題に移行する時に呼ばれるコンストラクタ
 // ignore: camel_case_types, must_be_immutable
@@ -35,7 +38,7 @@ class _userCheckNumberState extends State<userCheckNumber>  {
         // 1~100までの数字を格納
         // 重複の場合は再度番号発行
         while(!dupFlg){
-          tempNum = math.Random().nextInt(4)+1;
+          tempNum = math.Random().nextInt(100)+1;
           // 重複がない場合リストに追加
           if(!_userNoList.contains(tempNum)){
             _userNoList.add(tempNum);
@@ -56,23 +59,27 @@ class _userCheckNumberState extends State<userCheckNumber>  {
 
   @override
   Widget build(BuildContext context) {
+    _config = new config(context);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text(
-              //_itemUser[orderNo].userName.toString(),
-              widget._itemUser[widget._gameMaster.orderNo].userName,
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Colors.grey
+            SizedBox(
+              height: _config.deviceHeight * 0.1,
+              child: Text(
+                //_itemUser[orderNo].userName.toString(),
+                widget._itemUser[widget._gameMaster.orderNo].userName,
+                style: TextStyle(
+                    fontSize: 30,
+                    color: Colors.grey
+                ),
               ),
             ),
             returnCard(widget._itemUser[widget._gameMaster.orderNo].cardURL),
             if(widget._gameMaster.orderNo + 1 == widget._itemUser.length)
               SizedBox(
-                width: 150,
+                width: _config.deviceWidth * 0.4,
                 child: ElevatedButton(
                   onPressed: () {
                     widget._gameMaster.orderNo = 0;
@@ -88,7 +95,7 @@ class _userCheckNumberState extends State<userCheckNumber>  {
               )
             else
               SizedBox(
-                width: 150,
+                width: _config.deviceWidth * 0.4,
                 child: ElevatedButton(
                   onPressed: () {
                     widget._gameMaster.orderNo += 1;
@@ -182,6 +189,8 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
   Widget build(BuildContext context) {
 
     return SizedBox(
+      height: _config.deviceHeight * 0.5,
+
       child: GestureDetector(
         /*
          * トランプタッチジェスチャー
@@ -200,7 +209,6 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
 
         child: Stack(
           children: <Widget>[
-
             /*
              * トランプ表
              */
