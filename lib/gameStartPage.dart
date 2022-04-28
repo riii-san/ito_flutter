@@ -30,6 +30,7 @@ class _gameStartPageState extends State<gameStartPage> {
   // ユーザ追加テキストボックス内の文字を把握するコントローラー
   final valueUserNameController = TextEditingController();
 
+  // ユーザ情報を削除するメソッド
   void userRemove(int userId,String userName){
     _itemUser.removeAt(userId);
     _userNameList.remove(userName);

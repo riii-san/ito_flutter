@@ -5,9 +5,13 @@ import 'config.dart';
 // ignore: camel_case_types
 class userInfo{
 
+  // ユーザ固有番号
   int userId;
+  // ユーザ名
   final String userName;
+  // ユーザカード番号
   int cardNo;
+  // ユーザカード画像パス
   String cardURL;
 
   userInfo(
@@ -17,6 +21,7 @@ class userInfo{
       this.cardURL
       );
 
+  // ユーザ名とユーザ削除ボタンWidgetをセットで返すメソッド
   Widget returnUserWidget(void Function(int,String) userRemove , config _config){
     return Column(
       children: <Widget>[
@@ -62,6 +67,82 @@ class userInfo{
     );
   }
 
+  // ユーザ名Widgetを返すメソッド
+  // タップしたユーザの数字を返すメソッド
+  Widget returnUserNumberWidget(config _config, var context){
+
+    return Column(
+      children: <Widget>[
+        GestureDetector(
+          // タップしたユーザの数字をダイアログで表示
+          onTap: (){
+            showDialog(
+              context: context,
+              builder: (context) {
+                return CupertinoAlertDialog(
+                  content: Text("Are you " + this.userName + " ?" , style: TextStyle(fontSize: 18),),
+                  actions: <Widget>[
+                    CupertinoDialogAction(
+                      child: Text("No"),
+                      isDestructiveAction: true,
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    CupertinoDialogAction(
+                      child: Text("Yes"),
+                      // Yesを押下した場合、カードナンバーを違うダイアログで表示
+                      onPressed: (){
+                        Navigator.pop(context);
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return CupertinoAlertDialog(
+                              content: Text("Your number is " + this.cardNo.toString() , style:  TextStyle(fontSize: 18),),
+                              actions: <Widget>[
+                                CupertinoDialogAction(
+                                    child: Text("OK"),
+                                    onPressed: () => Navigator.pop(context)
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      }
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Container(
+            height: _config.deviceHeight * 0.055,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Container(
+                  width: _config.deviceWidth * 0.7,
+                  height: _config.deviceHeight * 0.055,
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(color: Colors.grey)
+                  ),
+                  child: Text(
+                      userName,
+                      style: TextStyle(fontSize: 20)
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        SizedBox(height: _config.deviceHeight * 0.008,)
+      ],
+    );
+
+  }
+
+
+  // 数字を元にカードのパスを返すメソッド
   static String returnCardNumPath(int num){
 
     return 'images/' + num.toString() + '.png';

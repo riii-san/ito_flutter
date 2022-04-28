@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ito/numberCheck.dart';
 import 'package:ito/userInfo.dart';
 import 'package:ito/gameMaster.dart';
+import 'package:ito/userAnswer.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'config.dart';
 
@@ -42,7 +44,7 @@ class _openKeywordState extends State<openKeyword> {
                   )
               ],
             ),
-            SizedBox(height: _config.deviceHeight * 0.05,),
+            SizedBox(height: _config.deviceHeight * 0.01,),
             Container(
               alignment: Alignment.center,
               height: _config.deviceHeight * 0.1,
@@ -54,7 +56,7 @@ class _openKeywordState extends State<openKeyword> {
                 ),
               ),
             ),
-            SizedBox(height: _config.deviceHeight * 0.02,),
+            SizedBox(height: _config.deviceHeight * 0.04,),
             Container(
               padding: EdgeInsets.all(20),
               height: _config.deviceHeight * 0.4,
@@ -86,7 +88,10 @@ class _openKeywordState extends State<openKeyword> {
                     height: _config.deviceHeight * 0.1,
                     minWidth: _config.deviceWidth * 0.1,
                     onPressed: (){
-                      // TODO : NumberCheck画面へ
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => numberCheck(widget._itemUser,widget._gameMaster),
+                        fullscreenDialog: true
+                      ));
                     },
                     color: Colors.blue,
                     shape: CircleBorder(),
@@ -103,9 +108,11 @@ class _openKeywordState extends State<openKeyword> {
                   width: _config.deviceWidth * 0.4,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (context) => userAnswer(widget._itemUser,widget._gameMaster),
+                      ));
                     },
-                    child: Text('ANSWER'),
+                    child: Text('YOUR ANSWER'),
                     style: ElevatedButton.styleFrom(
                       primary: Colors.red,
                     ),
