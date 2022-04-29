@@ -13,6 +13,8 @@ class userInfo{
   int cardNo;
   // ユーザカード画像パス
   String cardURL;
+  // ユーザ順番情報
+  int userOrderNo;
 
   userInfo(
       this.userId,

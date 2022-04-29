@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ito/gameMaster.dart';
 import 'package:ito/userInfo.dart';
+import 'package:ito/checkAnswer.dart';
 import 'config.dart';
-
-// ユーザの順番通りに格納する結果リスト
-List<userInfo> resultUserList = <userInfo>[];
 
 config _config;
 
@@ -22,14 +20,19 @@ class userAnswer extends StatefulWidget{
 // ignore: camel_case_types
 class _userAnswerState extends State<userAnswer> {
 
+  // 現在の答え番号をもつ変数
+  int currentOrderNo = 1;
+  // 削除したユーザが持っていた番号をもつ変数
+  int deleteOrderNo;
+
   // 結果リストの先頭からuserを格納するメソッド
   void resultUserAdd(userInfo user){
-    resultUserList.add(user);
+    widget._gameMaster.resultUserList.add(user);
   }
 
   // 結果リストから指定したユーザを削除
   void resultUserRemove(userInfo user){
-    resultUserList.remove(user);
+    widget._gameMaster.resultUserList.remove(user);
   }
 
   @override
@@ -101,6 +104,22 @@ class _userAnswerState extends State<userAnswer> {
                           onTap: (){
                             // 選択したユーザの順番が確定していなければリストに追加し番号を付与する
                             // そうでなければリストから削除し、リスト内に格納している他のユーザの順番を更新する
+                            if(widget._itemUser[index].userOrderNo == null){
+                              widget._itemUser[index].userOrderNo = currentOrderNo;
+                              currentOrderNo++;
+                            }
+                            else{
+                              deleteOrderNo = widget._itemUser[index].userOrderNo;
+                              widget._itemUser[index].userOrderNo = null;
+                              // 削除した番号より大きな値は再度番号振り直し
+                              for(userInfo user in widget._itemUser){
+                                if(user.userOrderNo != null &&user.userOrderNo > deleteOrderNo){
+                                  user.userOrderNo--;
+                                }
+                              }
+                              currentOrderNo--;
+                            }
+                            setState(() {});
                           },
                           child: Container(
                             height: _config.deviceHeight * 0.055,
@@ -123,7 +142,12 @@ class _userAnswerState extends State<userAnswer> {
                                 SizedBox(
                                     height: _config.deviceHeight * 0.03,
                                     width: _config.deviceWidth * 0.05,
-                                    child: Text("q")
+                                    // ユーザの順番が決まっていれば数字を、決まっていなければ何も表示しない
+                                    child: (widget._itemUser[index].userOrderNo != null) ?
+                                    Text(
+                                        widget._itemUser[index].userOrderNo.toString()
+                                    ):
+                                    Text(""),
                                 )
                               ],
                             ),
@@ -138,20 +162,39 @@ class _userAnswerState extends State<userAnswer> {
               ),
             ),
             SizedBox(height: _config.deviceHeight * 0.02,),
-            SizedBox(
-              width: _config.deviceWidth * 0.7,
-              child: ElevatedButton(
-                onPressed: () {
-                  // TODO : 答え合わせ画面へ
-                  Navigator.pop(context);
-                },
-                child: Text('MY ANSWER !!'),
-                // TODO : 全員の順番を決定出来たら活性にする
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
+            // ユーザの答え順が確定していれば答え合わせ画面へ
+            if(currentOrderNo == widget._itemUser.length+1)
+              SizedBox(
+                width: _config.deviceWidth * 0.7,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // 結果リストに並び順をソートしたリストを格納
+                    widget._gameMaster.resultUserList = widget._itemUser;
+                    widget._gameMaster.resultUserList.sort((a,b) => a.userOrderNo.compareTo(b.userOrderNo));
+                    // TODO : 答え合わせ画面へ
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => checkAnswer(widget._itemUser,widget._gameMaster),
+                      )
+                    );
+                    },
+                  child: Text('MY ANSWER !!'),
+                  // TODO : 全員の順番を決定出来たら活性にする
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                  ),
+                ),
+              )
+            else
+              SizedBox(
+                width: _config.deviceWidth * 0.7,
+                child: ElevatedButton(
+                  onPressed: null,
+                  child: Text('MY ANSWER !!'),
+                  style: ElevatedButton.styleFrom(
+                    primary: Colors.black12,
+                  ),
                 ),
               ),
-            ),
           ],
         ),
       ),

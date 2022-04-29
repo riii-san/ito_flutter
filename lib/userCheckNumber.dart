@@ -68,7 +68,6 @@ class _userCheckNumberState extends State<userCheckNumber>  {
             SizedBox(
               height: _config.deviceHeight * 0.1,
               child: Text(
-                //_itemUser[orderNo].userName.toString(),
                 widget._itemUser[widget._gameMaster.orderNo].userName,
                 style: TextStyle(
                     fontSize: 30,

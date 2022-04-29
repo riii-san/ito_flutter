@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ito/userInfo.dart';
+
 
 // ignore: camel_case_types
 class gameMaster{
@@ -14,6 +16,8 @@ class gameMaster{
   // TODO : 問題文が格納されているクラスを作成
   // TODO : 問題文番号をListに格納
   List<int> questionSentenceList;
+  // ユーザの順番通りに格納する結果リスト
+  List<userInfo> resultUserList = <userInfo>[];
 
   gameMaster(
       this.orderNo,
@@ -22,3 +26,4 @@ class gameMaster{
       );
 
 }
+
