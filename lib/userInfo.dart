@@ -13,8 +13,8 @@ class userInfo{
   int cardNo;
   // ユーザカード画像パス
   String cardURL;
-  // ユーザ順番情報
-  int userOrderNo;
+  // ユーザが既に順番を決めているのかどうか(列挙型)
+  DecidedStatus decidedStatus = DecidedStatus.unDecided;
 
   userInfo(
       this.userId,
@@ -151,4 +151,16 @@ class userInfo{
 
   }
 
+  static String returnNoneCarfPath(){
+
+    return 'images/none.png';
+
+  }
+
+}
+
+enum DecidedStatus{
+  unDecided,
+  currentDecide,
+  Decided
 }

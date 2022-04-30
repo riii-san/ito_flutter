@@ -20,19 +20,71 @@ class userAnswer extends StatefulWidget{
 // ignore: camel_case_types
 class _userAnswerState extends State<userAnswer> {
 
-  // 現在の答え番号をもつ変数
-  int currentOrderNo = 1;
-  // 削除したユーザが持っていた番号をもつ変数
-  int deleteOrderNo;
 
-  // 結果リストの先頭からuserを格納するメソッド
-  void resultUserAdd(userInfo user){
-    widget._gameMaster.resultUserList.add(user);
+  // 現在ユーザを選択済みかどうか制御するためにindex番号を格納する変数
+  int tempIndex;
+
+  // ignore: must_call_super
+  void initState(){
+    // 回答一番目に正解の順番を格納したリストを作成
+    // リストごと渡すと参照渡しになるためfor文で値渡しにする
+    if(widget._gameMaster.currentOrderNo == 1){
+      for(userInfo e in widget._itemUser){
+        widget._gameMaster.resultUserList.add(e);
+      }
+      widget._gameMaster.resultUserList.sort((a,b) => a.cardNo.compareTo(b.cardNo));
+    }
   }
 
-  // 結果リストから指定したユーザを削除
-  void resultUserRemove(userInfo user){
-    widget._gameMaster.resultUserList.remove(user);
+  // 選択状態からユーザwidgetを返すメソッド
+  // ignore: missing_return
+  Widget _buildChildUserContainer(int index){
+    switch(widget._itemUser[index].decidedStatus){
+      case DecidedStatus.unDecided:
+        return Container(
+          width: _config.deviceWidth * 0.7,
+          height: _config.deviceHeight * 0.055,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+          ),
+          child: Text(
+              widget._itemUser[index].userName,
+              style: TextStyle(fontSize: 20)
+          ),
+        );
+      case DecidedStatus.currentDecide:
+        return Container(
+          width: _config.deviceWidth * 0.7,
+          height: _config.deviceHeight * 0.055,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+            color: Colors.lightGreen,
+          ),
+          child: Text(
+              widget._itemUser[index].userName,
+              style: TextStyle(fontSize: 20)
+          ),
+        );
+      case DecidedStatus.Decided:
+        return Container(
+          width: _config.deviceWidth * 0.7,
+          height: _config.deviceHeight * 0.055,
+          padding: const EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(color: Colors.grey),
+            color: Colors.grey,
+          ),
+          child: Text(
+              widget._itemUser[index].userName,
+              style: TextStyle(fontSize: 20)
+          ),
+        );
+    }
   }
 
   @override
@@ -96,62 +148,28 @@ class _userAnswerState extends State<userAnswer> {
                   scrollDirection: Axis.vertical, // ListViewを縦方向にスクロール可能にするパラメータ
                   shrinkWrap: true,               // ListViewをColumn内で使用するために必要なパラメータ
                   itemBuilder: (BuildContext context, int index){
-                    // TODO : userInfoクラスでメソッド化
-                    // TODO : 各ユーザが何番目かを判断できないためメソッド化は難しい
                     return Column(
                       children: <Widget>[
                         GestureDetector(
                           onTap: (){
-                            // 選択したユーザの順番が確定していなければリストに追加し番号を付与する
-                            // そうでなければリストから削除し、リスト内に格納している他のユーザの順番を更新する
-                            if(widget._itemUser[index].userOrderNo == null){
-                              widget._itemUser[index].userOrderNo = currentOrderNo;
-                              currentOrderNo++;
-                            }
-                            else{
-                              deleteOrderNo = widget._itemUser[index].userOrderNo;
-                              widget._itemUser[index].userOrderNo = null;
-                              // 削除した番号より大きな値は再度番号振り直し
-                              for(userInfo user in widget._itemUser){
-                                if(user.userOrderNo != null &&user.userOrderNo > deleteOrderNo){
-                                  user.userOrderNo--;
-                                }
+                            // 各ユーザの選択状態を設定する
+                            if(widget._itemUser[index].decidedStatus == DecidedStatus.unDecided){
+                              if(tempIndex == null){
+                                widget._itemUser[index].decidedStatus = DecidedStatus.currentDecide;
                               }
-                              currentOrderNo--;
+                              else{
+                                widget._itemUser[tempIndex].decidedStatus = DecidedStatus.unDecided;
+                                widget._itemUser[index].decidedStatus = DecidedStatus.currentDecide;
+                              }
+                              tempIndex = index;
+                            }
+                            else if(widget._itemUser[index].decidedStatus == DecidedStatus.currentDecide){
+                              widget._itemUser[index].decidedStatus = DecidedStatus.unDecided;
+                              tempIndex = null;
                             }
                             setState(() {});
                           },
-                          child: Container(
-                            height: _config.deviceHeight * 0.055,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Container(
-                                  width: _config.deviceWidth * 0.6,
-                                  height: _config.deviceHeight * 0.055,
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      border: Border.all(color: Colors.grey)
-                                  ),
-                                  child: Text(
-                                      widget._itemUser[index].userName,
-                                      style: TextStyle(fontSize: 20)
-                                  ),
-                                ),
-                                SizedBox(
-                                    height: _config.deviceHeight * 0.03,
-                                    width: _config.deviceWidth * 0.05,
-                                    // ユーザの順番が決まっていれば数字を、決まっていなければ何も表示しない
-                                    child: (widget._itemUser[index].userOrderNo != null) ?
-                                    Text(
-                                        widget._itemUser[index].userOrderNo.toString()
-                                    ):
-                                    Text(""),
-                                )
-                              ],
-                            ),
-                          ),
+                          child: _buildChildUserContainer(index)
                         ),
                         SizedBox(height: _config.deviceHeight * 0.008,)
                       ],
@@ -163,22 +181,17 @@ class _userAnswerState extends State<userAnswer> {
             ),
             SizedBox(height: _config.deviceHeight * 0.02,),
             // ユーザの答え順が確定していれば答え合わせ画面へ
-            if(currentOrderNo == widget._itemUser.length+1)
+            if(tempIndex != null)
               SizedBox(
                 width: _config.deviceWidth * 0.7,
                 child: ElevatedButton(
                   onPressed: () {
-                    // 結果リストに並び順をソートしたリストを格納
-                    widget._gameMaster.resultUserList = widget._itemUser;
-                    widget._gameMaster.resultUserList.sort((a,b) => a.userOrderNo.compareTo(b.userOrderNo));
-                    // TODO : 答え合わせ画面へ
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => checkAnswer(widget._itemUser,widget._gameMaster),
+                      builder: (context) => checkAnswer(widget._itemUser[tempIndex],widget._gameMaster),
                       )
                     );
                     },
                   child: Text('MY ANSWER !!'),
-                  // TODO : 全員の順番を決定出来たら活性にする
                   style: ElevatedButton.styleFrom(
                     primary: Colors.red,
                   ),

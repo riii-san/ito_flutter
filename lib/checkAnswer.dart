@@ -5,11 +5,12 @@ import 'package:ito/userInfo.dart';
 import 'config.dart';
 
 config _config;
+bool tapFlg = true;
 
 // ignore: must_be_immutable, camel_case_types
 class checkAnswer extends StatefulWidget{
-  checkAnswer(this._itemUser,this._gameMaster);
-  List<userInfo> _itemUser;
+  checkAnswer(this._user,this._gameMaster);
+  userInfo _user;
   gameMaster _gameMaster;
 
   @override
@@ -52,38 +53,48 @@ class _checkAnswerState extends State<checkAnswer> {
                 ),
               ),
             ),
-            SizedBox(height: _config.deviceHeight * 0.01,),
-            Column(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Column(
                   children: <Widget>[
-                    returnCard(widget._itemUser[0].cardURL),
-                    returnCard(widget._itemUser[1].cardURL),
-                    returnCard(widget._itemUser[2].cardURL),
+                    Text(widget._user.userName),
+                    returnCard(widget._user.cardURL),
                   ],
                 ),
-                SizedBox(height: _config.deviceHeight * 0.01,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    returnCard(widget._itemUser[3].cardURL),
-                    returnCard(widget._itemUser[3].cardURL),
-                    returnCard(widget._itemUser[3].cardURL),
-                  ],
-                ),
-                SizedBox(height: _config.deviceHeight * 0.01,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    returnCard(widget._itemUser[3].cardURL),
-                    returnCard(widget._itemUser[3].cardURL),
-                    returnCard(widget._itemUser[3].cardURL),
-                  ],
-                )
+                returnNoneCard(userInfo.returnNoneCarfPath()),
+                returnNoneCard(userInfo.returnNoneCarfPath()),
               ],
             ),
-            SizedBox(height: _config.deviceHeight * 0.05,),
+            SizedBox(height: _config.deviceHeight * 0.01,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(widget._user.userName),
+                    returnCard(widget._user.cardURL),
+                  ],
+                ),
+                returnNoneCard(userInfo.returnNoneCarfPath()),
+                returnNoneCard(userInfo.returnNoneCarfPath()),
+              ],
+            ),
+            SizedBox(height: _config.deviceHeight * 0.01,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  children: <Widget>[
+                    Text(widget._user.userName),
+                    returnCard(widget._user.cardURL),
+                  ],
+                ),
+                returnNoneCard(userInfo.returnNoneCarfPath()),
+                returnNoneCard(userInfo.returnNoneCarfPath()),
+              ],
+            ),
+            SizedBox(height: _config.deviceHeight * 0.03,),
             SizedBox(
               width: _config.deviceWidth * 0.7,
               child: ElevatedButton(
@@ -98,6 +109,10 @@ class _checkAnswerState extends State<checkAnswer> {
       ),
     );
   }
+}
+
+Widget returnNoneCard(String cardURL){
+  return Image.asset(cardURL,height: _config.deviceHeight * 0.18,);
 }
 
 Widget returnCard(String cardURL){

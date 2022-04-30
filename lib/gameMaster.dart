@@ -18,6 +18,8 @@ class gameMaster{
   List<int> questionSentenceList;
   // ユーザの順番通りに格納する結果リスト
   List<userInfo> resultUserList = <userInfo>[];
+  // 現在の回答順の番号をもつ変数
+  int currentOrderNo = 1;
 
   gameMaster(
       this.orderNo,
