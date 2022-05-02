@@ -151,7 +151,7 @@ class userInfo{
 
   }
 
-  static String returnNoneCarfPath(){
+  static String returnNoneCardPath(){
 
     return 'images/none.png';
 

@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:ito/gameMaster.dart';
 import 'package:ito/userInfo.dart';
 import 'config.dart';
+import 'dart:async';
 
 config _config;
-bool tapFlg = true;
+
+// 今回の各ユーザの回答を判定するフラグ
+bool currentJudgeFlg = false;
 
 // ignore: must_be_immutable, camel_case_types
 class checkAnswer extends StatefulWidget{
@@ -19,6 +22,18 @@ class checkAnswer extends StatefulWidget{
 
 // ignore: camel_case_types
 class _checkAnswerState extends State<checkAnswer> {
+
+  @override
+  void initState() {
+
+    // 画面が描画されるタイミングでカレントの判定を行う
+    if(widget._gameMaster.resultUserList[widget._gameMaster.currentOrderNo-1].cardNo == widget._user.cardNo){
+      currentJudgeFlg = true;
+    }
+    else{
+      currentJudgeFlg = false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,17 +68,47 @@ class _checkAnswerState extends State<checkAnswer> {
                 ),
               ),
             ),
+            // ↓ここからユーザ名とカードを表示
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: <Widget>[
                     Text(widget._user.userName),
-                    returnCard(widget._user.cardURL),
+                    if(widget._gameMaster.currentOrderNo == 1)
+                      returnCard(widget._user.cardURL)
+                    else
+                      returnNumCard(widget._gameMaster.resultUserList[0].cardURL)
                   ],
                 ),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
+                Column(
+                  children: <Widget>[
+                    if(widget._gameMaster.currentOrderNo < 2)
+                      Text("")
+                    else
+                      Text(widget._user.userName),
+                    if(widget._gameMaster.currentOrderNo == 2)
+                      returnCard(widget._user.cardURL)
+                    else if(widget._gameMaster.currentOrderNo < 2)
+                      returnNoneCard(userInfo.returnNoneCardPath())
+                    else
+                      returnNumCard(widget._gameMaster.resultUserList[1].cardURL)
+                  ],
+                ),
+                Column(
+                  children: <Widget>[
+                    if(widget._gameMaster.currentOrderNo < 3)
+                      Text("")
+                    else
+                      Text(widget._user.userName),
+                    if(widget._gameMaster.currentOrderNo == 3)
+                      returnCard(widget._user.cardURL)
+                    else if(widget._gameMaster.currentOrderNo < 3)
+                      returnNoneCard(userInfo.returnNoneCardPath())
+                    else
+                      returnNumCard(widget._gameMaster.resultUserList[2].cardURL)
+                  ]
+                ),
               ],
             ),
             SizedBox(height: _config.deviceHeight * 0.01,),
@@ -71,13 +116,47 @@ class _checkAnswerState extends State<checkAnswer> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  children: <Widget>[
-                    Text(widget._user.userName),
-                    returnCard(widget._user.cardURL),
-                  ],
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 4)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 4)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 4)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[3].cardURL)
+                    ]
                 ),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
+                Column(
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 5)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 5)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 5)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[4].cardURL)
+                    ]
+                ),
+                Column(
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 6)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 6)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 6)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[5].cardURL)
+                    ]
+                ),
               ],
             ),
             SizedBox(height: _config.deviceHeight * 0.01,),
@@ -85,13 +164,47 @@ class _checkAnswerState extends State<checkAnswer> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
-                  children: <Widget>[
-                    Text(widget._user.userName),
-                    returnCard(widget._user.cardURL),
-                  ],
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 7)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 7)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 7)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[6].cardURL)
+                    ]
                 ),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
-                returnNoneCard(userInfo.returnNoneCarfPath()),
+                Column(
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 8)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 8)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 8)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[7].cardURL)
+                    ]
+                ),
+                Column(
+                    children: <Widget>[
+                      if(widget._gameMaster.currentOrderNo < 9)
+                        Text("")
+                      else
+                        Text(widget._user.userName),
+                      if(widget._gameMaster.currentOrderNo == 9)
+                        returnCard(widget._user.cardURL)
+                      else if(widget._gameMaster.currentOrderNo < 9)
+                        returnNoneCard(userInfo.returnNoneCardPath())
+                      else
+                        returnNumCard(widget._gameMaster.resultUserList[8].cardURL)
+                    ]
+                ),
               ],
             ),
             SizedBox(height: _config.deviceHeight * 0.03,),
@@ -111,7 +224,16 @@ class _checkAnswerState extends State<checkAnswer> {
   }
 }
 
+// カードがタップされたかどうかを判定するフラグ
+bool tapFlg2 = true;
+// 丸orバツを描くかどうかのフラグ
+bool drawFlg = false;
+
 Widget returnNoneCard(String cardURL){
+  return Image.asset(cardURL,height: _config.deviceHeight * 0.18,);
+}
+
+Widget returnNumCard(String cardURL){
   return Image.asset(cardURL,height: _config.deviceHeight * 0.18,);
 }
 
@@ -136,6 +258,16 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
   Animation<double> _backAnination;
 
   Image _backImage = Image.asset("images/card_back.png");
+
+  void drawIcon(){
+    drawFlg= true;
+    setState(() {});
+    Duration threeSeconds = Duration(seconds: 3);
+    Future.delayed(threeSeconds, () {
+      drawFlg = false;
+      setState(() {});
+    });
+  }
 
   @override
   void initState() {
@@ -191,15 +323,25 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
          * トランプタッチジェスチャー
          */
         onTap: () {
+          if(tapFlg2){
             setState(() {
               if (_controller.isCompleted || _controller.velocity > 0)
                 _controller.reverse();
               else
                 _controller.forward();
             });
+            tapFlg2 = false;
+
+            // 非同期で判定アイコン表示
+            Duration threeSeconds = Duration(seconds: 3);
+            Future.delayed(threeSeconds, () {
+              drawIcon();
+            });
+          }
         },
 
         child: Stack(
+          alignment: AlignmentDirectional.center,
           children: <Widget>[
             /*
              * トランプ表
@@ -228,6 +370,15 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
                 );
               },
             ),
+            // 正解であれば丸、間違いの場合バツ
+            if(drawFlg && currentJudgeFlg)
+              Container(
+                  child: Icon(Icons.circle_outlined, size: _config.deviceWidth * 0.25, color: Colors.lightGreen,)
+              )
+            else if(drawFlg && !currentJudgeFlg)
+              Container(
+                  child: Icon(Icons.clear, size: _config.deviceWidth * 0.25, color: Colors.red,)
+              )
           ],
         ),
       ),
@@ -243,6 +394,7 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
       alignment: FractionalOffset.center,
       child: child,
     );
+
   }
 
   @override
