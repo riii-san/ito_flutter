@@ -157,6 +157,13 @@ class userInfo{
 
   }
 
+  static List<userInfo> returnInitializeUserList(List<userInfo> recieveList){
+    for(userInfo user in recieveList){
+      user.decidedStatus = DecidedStatus.unDecided;
+    }
+    return recieveList;
+  }
+
 }
 
 enum DecidedStatus{

@@ -1,7 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ito/gameEnd.dart';
 import 'package:ito/gameMaster.dart';
+import 'package:ito/userAnswer.dart';
+import 'package:ito/userCheckNumber.dart';
 import 'package:ito/userInfo.dart';
+import 'package:ito/answerCurrentQuestion.dart';
 import 'config.dart';
 import 'dart:async';
 
@@ -9,10 +13,17 @@ config _config;
 
 // 今回の各ユーザの回答を判定するフラグ
 bool currentJudgeFlg = false;
+// カードがタップされたかどうかを判定するフラグ
+bool tapFlg2;
+// 丸orバツを描くかどうかを判定するフラグ
+bool drawFlg = false;
+// 次の画面へ進んでも良いかどうかを判定するフラグ
+bool nextPageFlg;
 
 // ignore: must_be_immutable, camel_case_types
 class checkAnswer extends StatefulWidget{
-  checkAnswer(this._user,this._gameMaster);
+  checkAnswer(this._itemUser,this._user,this._gameMaster);
+  List<userInfo> _itemUser;
   userInfo _user;
   gameMaster _gameMaster;
 
@@ -26,6 +37,11 @@ class _checkAnswerState extends State<checkAnswer> {
   @override
   void initState() {
 
+    // tapFlg2 : カードを一回だけ反転可能にするフラグをON
+    // nextPageFlg : 次の画面に遷移可能にするフラグをON
+    tapFlg2 = true;
+    nextPageFlg = false;
+
     // 画面が描画されるタイミングでカレントの判定を行う
     if(widget._gameMaster.resultUserList[widget._gameMaster.currentOrderNo-1].cardNo == widget._user.cardNo){
       currentJudgeFlg = true;
@@ -33,6 +49,10 @@ class _checkAnswerState extends State<checkAnswer> {
     else{
       currentJudgeFlg = false;
     }
+  }
+
+  void redraw(){
+    setState(() {});
   }
 
   @override
@@ -74,9 +94,12 @@ class _checkAnswerState extends State<checkAnswer> {
               children: <Widget>[
                 Column(
                   children: <Widget>[
-                    Text(widget._user.userName),
                     if(widget._gameMaster.currentOrderNo == 1)
-                      returnCard(widget._user.cardURL)
+                      Text(widget._user.userName)
+                    else
+                      Text(widget._gameMaster.resultUserList[0].userName),
+                    if(widget._gameMaster.currentOrderNo == 1)
+                      returnCard(widget._user.cardURL,redraw)
                     else
                       returnNumCard(widget._gameMaster.resultUserList[0].cardURL)
                   ],
@@ -85,10 +108,12 @@ class _checkAnswerState extends State<checkAnswer> {
                   children: <Widget>[
                     if(widget._gameMaster.currentOrderNo < 2)
                       Text("")
+                    else if(widget._gameMaster.currentOrderNo == 2)
+                      Text(widget._user.userName)
                     else
-                      Text(widget._user.userName),
+                      Text(widget._gameMaster.resultUserList[1].userName),
                     if(widget._gameMaster.currentOrderNo == 2)
-                      returnCard(widget._user.cardURL)
+                      returnCard(widget._user.cardURL,redraw)
                     else if(widget._gameMaster.currentOrderNo < 2)
                       returnNoneCard(userInfo.returnNoneCardPath())
                     else
@@ -99,10 +124,12 @@ class _checkAnswerState extends State<checkAnswer> {
                   children: <Widget>[
                     if(widget._gameMaster.currentOrderNo < 3)
                       Text("")
+                    else if(widget._gameMaster.currentOrderNo == 3)
+                      Text(widget._user.userName)
                     else
-                      Text(widget._user.userName),
+                      Text(widget._gameMaster.resultUserList[2].userName),
                     if(widget._gameMaster.currentOrderNo == 3)
-                      returnCard(widget._user.cardURL)
+                      returnCard(widget._user.cardURL,redraw)
                     else if(widget._gameMaster.currentOrderNo < 3)
                       returnNoneCard(userInfo.returnNoneCardPath())
                     else
@@ -119,10 +146,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 4)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 4)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[3].userName),
                       if(widget._gameMaster.currentOrderNo == 4)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 4)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -133,10 +162,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 5)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 5)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[4].userName),
                       if(widget._gameMaster.currentOrderNo == 5)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 5)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -147,10 +178,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 6)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 6)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[5].userName),
                       if(widget._gameMaster.currentOrderNo == 6)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 6)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -167,10 +200,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 7)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 7)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[6].userName),
                       if(widget._gameMaster.currentOrderNo == 7)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 7)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -181,10 +216,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 8)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 8)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[7].userName),
                       if(widget._gameMaster.currentOrderNo == 8)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 8)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -195,10 +232,12 @@ class _checkAnswerState extends State<checkAnswer> {
                     children: <Widget>[
                       if(widget._gameMaster.currentOrderNo < 9)
                         Text("")
+                      else if(widget._gameMaster.currentOrderNo == 9)
+                        Text(widget._user.userName)
                       else
-                        Text(widget._user.userName),
+                        Text(widget._gameMaster.resultUserList[8].userName),
                       if(widget._gameMaster.currentOrderNo == 9)
-                        returnCard(widget._user.cardURL)
+                        returnCard(widget._user.cardURL,redraw)
                       else if(widget._gameMaster.currentOrderNo < 9)
                         returnNoneCard(userInfo.returnNoneCardPath())
                       else
@@ -208,15 +247,88 @@ class _checkAnswerState extends State<checkAnswer> {
               ],
             ),
             SizedBox(height: _config.deviceHeight * 0.03,),
-            SizedBox(
+            // 次の画面の移行条件
+            // ①正解且つまだ回答していないユーザがいれば回答画面へ
+            // ②正解且つ全てのユーザの回答が終了し、まだ問題を3つクリアしていなければ次の問題へ(ユーザカード確認画面へ)
+            // ③正解且つ全てのユーザの回答が終了し、3つの問題をクリアしていればゲームクリア画面へ
+            // ④間違えた場合、今回の問題の答え合わせ画面へ
+
+            // ④
+            // なぜか入らなかったため、一番最初に記述
+            if(currentJudgeFlg == false && nextPageFlg)
+              SizedBox(
               width: _config.deviceWidth * 0.7,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  // orderNo:初期化(0) , questionNo:+1 , life:-1 , resultUserList:初期化(要素削除) , currentOrderNo:初期化(1) , _itemUserのdecidedStatus:初期化
+                  widget._gameMaster.orderNo = 0;
+                  widget._gameMaster.life--;
+                  widget._gameMaster.currentOrderNo = 1;
+                  widget._itemUser = userInfo.returnInitializeUserList(widget._itemUser);
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => answerCurrentQuestion(widget._itemUser,widget._gameMaster),
+                  )
+                  );
                 },
-                child: Text('NEXT QUESTION'),
+                child: Text('CHECK ANSWER'),
               ),
             )
+            // ①
+            else if(currentJudgeFlg && nextPageFlg && widget._gameMaster.currentOrderNo < widget._gameMaster.resultUserList.length)
+              SizedBox(
+                width: _config.deviceWidth * 0.7,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // オーダー番号をインクリメントする
+                    widget._gameMaster.currentOrderNo++;
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => userAnswer(widget._itemUser,widget._gameMaster),
+                    )
+                    );
+                  },
+                  child: Text('NEXT USER ANSWER'),
+                ),
+              )
+            // ②,③
+            else if(currentJudgeFlg && nextPageFlg && widget._gameMaster.currentOrderNo == widget._gameMaster.resultUserList.length)
+              // ②
+              if(widget._gameMaster.success < 2)
+                SizedBox(
+                  width: _config.deviceWidth * 0.7,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // 次の問題画面へ
+                      // 次の問題に行く前に下記項目の値を変更
+                      // orderNo:初期化(0) , questionNo:+1 , success:+1 , resultUserList:初期化(要素削除) , currentOrderNo:初期化(1) , _itemUserのdecidedStatus:初期化
+                      widget._gameMaster.orderNo = 0;
+                      widget._gameMaster.questionNo++;
+                      widget._gameMaster.success++;
+                      widget._gameMaster.resultUserList.clear();
+                      widget._gameMaster.currentOrderNo = 1;
+                      widget._itemUser = userInfo.returnInitializeUserList(widget._itemUser);
+                      Navigator.push(context, MaterialPageRoute(
+                        // ユーザカード確認画面へ
+                        builder: (context) => userCheckNumber(widget._itemUser,widget._gameMaster),
+                      )
+                      );
+                    },
+                    child: Text('NEXT QUESTION'),
+                  ),
+                )
+              // ③
+              else if(widget._gameMaster.success == 2)
+                SizedBox(
+                  width: _config.deviceWidth * 0.7,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => gameEnd(true),
+                      )
+                      );
+                    },
+                    child: Text('END'),
+                  ),
+                )
           ],
         ),
       ),
@@ -224,10 +336,6 @@ class _checkAnswerState extends State<checkAnswer> {
   }
 }
 
-// カードがタップされたかどうかを判定するフラグ
-bool tapFlg2 = true;
-// 丸orバツを描くかどうかのフラグ
-bool drawFlg = false;
 
 Widget returnNoneCard(String cardURL){
   return Image.asset(cardURL,height: _config.deviceHeight * 0.18,);
@@ -237,17 +345,19 @@ Widget returnNumCard(String cardURL){
   return Image.asset(cardURL,height: _config.deviceHeight * 0.18,);
 }
 
-Widget returnCard(String cardURL){
+Widget returnCard(String cardURL,var recieveRedraw){
   return AnimationCard(
     Image.asset(
       cardURL,
     ),
+    recieveRedraw
   );
 }
 
 class AnimationCard extends StatefulWidget {
   final Image frontImage;
-  AnimationCard(this.frontImage) : super();
+  var receiveRedraw;
+  AnimationCard(this.frontImage,this.receiveRedraw) : super();
   _AnimationCardState createState() => _AnimationCardState();
 }
 
@@ -260,12 +370,15 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
   Image _backImage = Image.asset("images/card_back.png");
 
   void drawIcon(){
-    drawFlg= true;
+    drawFlg = true;
     setState(() {});
     Duration threeSeconds = Duration(seconds: 3);
     Future.delayed(threeSeconds, () {
       drawFlg = false;
+      nextPageFlg = true;
       setState(() {});
+      // 親Widgetの一番下のボタンを表示させるために画面更新
+      widget.receiveRedraw();
     });
   }
 

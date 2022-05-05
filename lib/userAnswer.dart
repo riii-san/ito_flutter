@@ -186,8 +186,9 @@ class _userAnswerState extends State<userAnswer> {
                 width: _config.deviceWidth * 0.7,
                 child: ElevatedButton(
                   onPressed: () {
+                    widget._itemUser[tempIndex].decidedStatus = DecidedStatus.Decided;
                     Navigator.push(context, MaterialPageRoute(
-                      builder: (context) => checkAnswer(widget._itemUser[tempIndex],widget._gameMaster),
+                      builder: (context) => checkAnswer(widget._itemUser,widget._itemUser[tempIndex],widget._gameMaster),
                       )
                     );
                     },

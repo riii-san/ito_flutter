@@ -12,6 +12,8 @@ class gameMaster{
   int questionNo;
   // 残り体力
   int life;
+  // 正当数
+  int success = 0;
   // 問題文番号が格納されているリスト(最大要素数は5)
   // TODO : 問題文が格納されているクラスを作成
   // TODO : 問題文番号をListに格納
