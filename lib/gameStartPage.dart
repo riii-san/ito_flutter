@@ -5,12 +5,6 @@ import 'package:ito/userCheckNumber.dart';
 import 'config.dart';
 
 
-// ゲーム参加ユーザが格納されているリスト
-// TODO : グローバル宣言でも良いのか
-List<userInfo> _itemUser = <userInfo>[];
-// ユーザがカードをめくる番号、問題番号、残りライフ
-gameMaster _gameMaster = gameMaster(0,1,3);
-
 // ignore: camel_case_types, must_be_immutable
 class gameStartPage extends StatefulWidget {
 
@@ -21,6 +15,11 @@ class gameStartPage extends StatefulWidget {
 
 // ignore: camel_case_types
 class _gameStartPageState extends State<gameStartPage> {
+
+  // ゲーム参加ユーザが格納されているリスト
+  List<userInfo> _itemUser = <userInfo>[];
+  // ユーザがカードをめくる番号、問題番号、残りライフ
+  gameMaster _gameMaster = gameMaster(0,1,3);
 
   // ユーザ名を格納するリスト
   // ユーザ追加する際に同じ名前があればfalseを返す必要があるため
@@ -75,25 +74,40 @@ class _gameStartPageState extends State<gameStartPage> {
                         ),
                       ),
                       // プラスボタン
-                      SizedBox(
-                        child: MaterialButton(
+                      if(_userNameList.length < 9)
+                        SizedBox(
+                          child: MaterialButton(
+                            height: _config.deviceHeight * 0.1,
+                            minWidth: _config.deviceWidth * 0.1,
+                            onPressed: (){
+                              if (valueUserNameController.text.isNotEmpty && !_userNameList.contains(valueUserNameController.text)) {
+                                _itemUser.add(new userInfo(_itemUser.length, valueUserNameController.text, null,null));
+                                _userNameList.add(valueUserNameController.text);
+                                valueUserNameController.clear();
+                                setState(() {});
+                              }
+                            },
+                            color: Colors.blue,
+                            shape: CircleBorder(),
+                            child: Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          ),
+                        )
+                      else
+                        // TODO : 非活性にするとボタンが消える
+                        MaterialButton(
                           height: _config.deviceHeight * 0.1,
                           minWidth: _config.deviceWidth * 0.1,
-                          onPressed: (){
-                            if (valueUserNameController.text.isNotEmpty && !_userNameList.contains(valueUserNameController.text)) {
-                              _itemUser.add(new userInfo(_itemUser.length, valueUserNameController.text, null,null));
-                              _userNameList.add(valueUserNameController.text);
-                              setState(() {});
-                            }
-                          },
-                          color: Colors.blue,
+                          onPressed: (){},
+                          color: Colors.black12,
                           shape: CircleBorder(),
                           child: Icon(
                             Icons.add,
                             color: Colors.white,
                           ),
-                        ),
-                      )
+                        )
                     ],
                   ),
                 ),

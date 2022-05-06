@@ -159,10 +159,6 @@ class _answerCurrentQuestionState extends State<answerCurrentQuestion> {
               ],
             ),
             SizedBox(height: _config.deviceHeight * 0.03,),
-            // 次の画面の移行条件
-            // TODO : 答え合わせ画面で → ⑤ ④終了後、ライフが残っていれば次の問題へ
-            // TODO : 答え合わせ画面で → ⑥ ④終了後、ライフが残っていなければゲームオーバー画面へ
-
             // ライフが残っていれば次の問題へ
             if(widget._gameMaster.life > 0)
               SizedBox(

@@ -264,7 +264,7 @@ class _checkAnswerState extends State<checkAnswer> {
                   widget._gameMaster.orderNo = 0;
                   widget._gameMaster.life--;
                   widget._gameMaster.currentOrderNo = 1;
-                  widget._itemUser = userInfo.returnInitializeUserList(widget._itemUser);
+                  widget._itemUser = userInfo.returnInitializeUserDecidedStatusList(widget._itemUser);
                   Navigator.push(context, MaterialPageRoute(
                     builder: (context) => answerCurrentQuestion(widget._itemUser,widget._gameMaster),
                   )
@@ -305,7 +305,7 @@ class _checkAnswerState extends State<checkAnswer> {
                       widget._gameMaster.success++;
                       widget._gameMaster.resultUserList.clear();
                       widget._gameMaster.currentOrderNo = 1;
-                      widget._itemUser = userInfo.returnInitializeUserList(widget._itemUser);
+                      widget._itemUser = userInfo.returnInitializeUserDecidedStatusList(widget._itemUser);
                       Navigator.push(context, MaterialPageRoute(
                         // ユーザカード確認画面へ
                         builder: (context) => userCheckNumber(widget._itemUser,widget._gameMaster),

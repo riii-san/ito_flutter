@@ -157,10 +157,15 @@ class userInfo{
 
   }
 
-  static List<userInfo> returnInitializeUserList(List<userInfo> recieveList){
+  static List<userInfo> returnInitializeUserDecidedStatusList(List<userInfo> recieveList){
     for(userInfo user in recieveList){
       user.decidedStatus = DecidedStatus.unDecided;
     }
+    return recieveList;
+  }
+
+  static List<userInfo> returnInitializeUserList(List<userInfo> recieveList){
+    recieveList.clear();
     return recieveList;
   }
 
