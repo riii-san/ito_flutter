@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
-
+import 'config.dart';
 import 'gameStartPage.dart';
 
 // ignore: camel_case_types
 class mainForm extends StatelessWidget{
+
   @override
   Widget build(BuildContext context) {
+    config _config = new config(context);
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image.asset('images/ito.png'),
-            //Text('ito' , style: TextStyle(fontWeight: FontWeight.normal, fontSize: 80, color: Colors.blue),),
-            SizedBox(height: 60,),
+            Image.asset(
+              'images/ito.png',
+              width: _config.deviceWidth * 0.4,
+            ),
+            SizedBox(height: _config.deviceHeight * 0.1,),
             SizedBox(
-              width: 200,
+              width: _config.deviceWidth * 0.5,
               child: ElevatedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
                     builder: (context) => gameStartPage()
@@ -26,9 +30,9 @@ class mainForm extends StatelessWidget{
                 ),
               ),
             ),
-            SizedBox(height: 30,),
+            SizedBox(height: _config.deviceWidth * 0.1,),
             SizedBox(
-              width: 200,
+              width: _config.deviceWidth * 0.5,
               child: ElevatedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
                   // TODO : Tutorialページへ
