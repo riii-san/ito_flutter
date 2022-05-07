@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ito/gameEnd.dart';
 import 'config.dart';
 import 'gameStartPage.dart';
 
@@ -22,7 +23,7 @@ class mainForm extends StatelessWidget{
               width: _config.deviceWidth * 0.5,
               child: ElevatedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
-                    builder: (context) => gameStartPage()
+                  builder: (context) => gameStartPage()
                 ));
               },
                 child: Text(
@@ -36,7 +37,8 @@ class mainForm extends StatelessWidget{
               child: ElevatedButton(onPressed: (){
                 Navigator.push(context, MaterialPageRoute(
                   // TODO : Tutorialページへ
-                  //builder: (context) => gameStartPage()
+                  // debug ゲームエンドページへ
+                  builder: (context) => gameEnd(false)
                 ));
               },
                 child: Text(
