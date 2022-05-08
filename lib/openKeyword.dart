@@ -27,7 +27,6 @@ class _openKeywordState extends State<openKeyword> {
     return Scaffold(
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             SizedBox(height: _config.deviceHeight * 0.1,),
             Row(
@@ -50,7 +49,7 @@ class _openKeywordState extends State<openKeyword> {
               child: Text(
                 'Question No.' + widget._gameMaster.questionNo.toString(),
                 style: TextStyle(
-                    fontSize: 35,
+                    fontSize: _config.deviceWidth / 12,
                     color: Colors.grey
                 ),
               ),
@@ -70,7 +69,7 @@ class _openKeywordState extends State<openKeyword> {
                   TyperAnimatedText(
                     widget._gameMaster.question[widget._gameMaster.questionSentenceList[widget._gameMaster.questionNo-1]],
                     textStyle: TextStyle(
-                      fontSize: 32
+                      fontSize: _config.deviceWidth / 13
                     ),
                     speed: const Duration(milliseconds: 100),
                   ),

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'config.dart';
 import 'mainForm.dart';
 
+config _config;
+
 // ignore: camel_case_types, must_be_immutable
 class gameEnd extends StatelessWidget{
 
@@ -20,14 +22,20 @@ class gameEnd extends StatelessWidget{
             SizedBox(height: _config.deviceHeight * 0.45,),
 
             if(gameEndFlg)
-              Text(
-                "GAME CLEAR !!",
-                style: TextStyle(color: Colors.grey,fontSize: 25),
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  "GAME CLEAR !!",
+                  style: TextStyle(color: Colors.grey,fontSize: _config.deviceWidth * 0.1),
+                ),
               )
             else
-              Text(
-                "GAME OVER",
-                style: TextStyle(color: Colors.grey,fontSize: 25),
+              FittedBox(
+                fit: BoxFit.fitWidth,
+                child: Text(
+                  "GAME OVER",
+                  style: TextStyle(color: Colors.grey,fontSize: _config.deviceWidth * 0.1),
+                ),
               ),
 
             SizedBox(height: _config.deviceHeight * 0.3,),

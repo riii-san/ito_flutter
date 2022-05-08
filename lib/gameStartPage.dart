@@ -24,7 +24,6 @@ class _gameStartPageState extends State<gameStartPage> {
 
   // ユーザ名を格納するリスト
   // ユーザ追加する際に同じ名前があればfalseを返す必要があるため
-  // TODO : _itemUserだけで実装できないか??
   List<String> _userNameList = <String>[];
 
   // ユーザ追加テキストボックス内の文字を把握するコントローラー
@@ -101,7 +100,6 @@ class _gameStartPageState extends State<gameStartPage> {
                           ),
                         )
                       else
-                        // TODO : 非活性にするとボタンが消える
                         MaterialButton(
                           height: _config.deviceHeight * 0.1,
                           minWidth: _config.deviceWidth * 0.1,
@@ -121,7 +119,7 @@ class _gameStartPageState extends State<gameStartPage> {
                 Text(
                   'User List',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: _config.deviceWidth * 0.08,
                       color: Colors.grey
                   ),
                 ),
@@ -173,7 +171,7 @@ class _gameStartPageState extends State<gameStartPage> {
                         child: ElevatedButton(
                           onPressed: (){
                             // 問題作成
-                            for(int i = 0; i < _gameMaster.life + 2 ; i++){
+                            for(int i = 0; i < _gameMaster.life * 2 ; i++){
                               while(!dupFlg){
                                 tempNum = math.Random().nextInt(_gameMaster.question.length);
                                 // 重複がない場合リストに追加

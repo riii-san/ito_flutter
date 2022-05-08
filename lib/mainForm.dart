@@ -26,8 +26,11 @@ class mainForm extends StatelessWidget{
                   builder: (context) => gameStartPage()
                 ));
               },
-                child: Text(
-                    'GAME START'
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                      'GAME START'
+                  ),
                 ),
               ),
             ),
@@ -38,11 +41,14 @@ class mainForm extends StatelessWidget{
                 Navigator.push(context, MaterialPageRoute(
                   // TODO : Tutorialページへ
                   // debug ゲームエンドページへ
-                  builder: (context) => gameEnd(false)
+                  builder: (context) => gameEnd(true)
                 ));
               },
-                child: Text(
-                    'TUTORIAL'
+                child: FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                      'TUTORIAL'
+                  ),
                 ),
               ),
             ),

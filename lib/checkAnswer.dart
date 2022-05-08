@@ -83,7 +83,7 @@ class _checkAnswerState extends State<checkAnswer> {
               child: Text(
                 'Question No.' + widget._gameMaster.questionNo.toString(),
                 style: TextStyle(
-                    fontSize: 35,
+                    fontSize: _config.deviceWidth / 12,
                     color: Colors.grey
                 ),
               ),

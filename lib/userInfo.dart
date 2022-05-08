@@ -42,7 +42,7 @@ class userInfo{
                 ),
                 child: Text(
                     userName,
-                    style: TextStyle(fontSize: 20)
+                    style: TextStyle(fontSize: _config.deviceWidth * 0.05)
                 ),
               ),
               Expanded(

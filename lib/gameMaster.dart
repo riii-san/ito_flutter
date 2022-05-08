@@ -14,9 +14,7 @@ class gameMaster{
   int life;
   // 正当数
   int success = 0;
-  // 問題文番号が格納されているリスト(最大要素数は5)
-  // TODO : 問題文が格納されているクラスを作成
-  // TODO : 問題文番号をListに格納
+  // 問題文番号が格納されているリスト
   List<int> questionSentenceList = <int>[];
   // ユーザの順番通りに格納する結果リスト
   List<userInfo> resultUserList = <userInfo>[];
@@ -29,6 +27,7 @@ class gameMaster{
       this.life
       );
 
+  // 問題リスト
   List<String> question = [
     '人気な漫画',
     '人気なゲーム',
