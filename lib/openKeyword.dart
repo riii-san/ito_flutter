@@ -27,14 +27,12 @@ class _openKeywordState extends State<openKeyword> {
     return Scaffold(
       body: Center(
         child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             SizedBox(height: _config.deviceHeight * 0.1,),
             Row(
               children: <Widget>[
                 SizedBox(width: _config.deviceWidth * 0.03,),
                 for(int i = 0; i < widget._gameMaster.life; i++)
-                  //Container(padding: EdgeInsets.all(2), child: Text('❤︎', style: TextStyle(color: Colors.red,fontSize: 20))),
                   Container(
                     padding: EdgeInsets.all(2),
                     child: Icon(
@@ -51,7 +49,7 @@ class _openKeywordState extends State<openKeyword> {
               child: Text(
                 'Question No.' + widget._gameMaster.questionNo.toString(),
                 style: TextStyle(
-                    fontSize: 35,
+                    fontSize: _config.deviceWidth / 12,
                     color: Colors.grey
                 ),
               ),
@@ -69,9 +67,9 @@ class _openKeywordState extends State<openKeyword> {
               child: AnimatedTextKit(
                 animatedTexts: [
                   TyperAnimatedText(
-                    '人気な漫画',
+                    widget._gameMaster.question[widget._gameMaster.questionSentenceList[widget._gameMaster.questionNo-1]],
                     textStyle: TextStyle(
-                      fontSize: 32
+                      fontSize: _config.deviceWidth / 13
                     ),
                     speed: const Duration(milliseconds: 100),
                   ),

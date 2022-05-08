@@ -83,7 +83,7 @@ class _checkAnswerState extends State<checkAnswer> {
               child: Text(
                 'Question No.' + widget._gameMaster.questionNo.toString(),
                 style: TextStyle(
-                    fontSize: 35,
+                    fontSize: _config.deviceWidth / 12,
                     color: Colors.grey
                 ),
               ),
@@ -372,7 +372,7 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
   void drawIcon(){
     drawFlg = true;
     setState(() {});
-    Duration threeSeconds = Duration(seconds: 3);
+    Duration threeSeconds = Duration(seconds: 2);
     Future.delayed(threeSeconds, () {
       drawFlg = false;
       nextPageFlg = true;
@@ -446,7 +446,7 @@ class _AnimationCardState extends State<AnimationCard> with TickerProviderStateM
             tapFlg2 = false;
 
             // 非同期で判定アイコン表示
-            Duration threeSeconds = Duration(seconds: 3);
+            Duration threeSeconds = Duration(milliseconds: 1500);
             Future.delayed(threeSeconds, () {
               drawIcon();
             });

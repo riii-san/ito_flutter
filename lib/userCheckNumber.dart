@@ -63,19 +63,22 @@ class _userCheckNumberState extends State<userCheckNumber>  {
     return Scaffold(
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
+            SizedBox(height: _config.deviceHeight * 0.15,),
             SizedBox(
               height: _config.deviceHeight * 0.1,
               child: Text(
                 widget._itemUser[widget._gameMaster.orderNo].userName,
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: _config.deviceWidth / 14,
                     color: Colors.grey
                 ),
               ),
             ),
+            SizedBox(height: _config.deviceHeight * 0.04,),
             returnCard(widget._itemUser[widget._gameMaster.orderNo].cardURL),
+            SizedBox(height: _config.deviceHeight * 0.04,),
             if(widget._gameMaster.orderNo + 1 == widget._itemUser.length)
               SizedBox(
                 width: _config.deviceWidth * 0.4,

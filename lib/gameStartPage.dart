@@ -3,6 +3,7 @@ import 'package:ito/userInfo.dart';
 import 'package:ito/gameMaster.dart';
 import 'package:ito/userCheckNumber.dart';
 import 'config.dart';
+import 'dart:math' as math;
 
 
 // ignore: camel_case_types, must_be_immutable
@@ -23,17 +24,20 @@ class _gameStartPageState extends State<gameStartPage> {
 
   // ユーザ名を格納するリスト
   // ユーザ追加する際に同じ名前があればfalseを返す必要があるため
-  // TODO : _itemUserだけで実装できないか??
   List<String> _userNameList = <String>[];
 
   // ユーザ追加テキストボックス内の文字を把握するコントローラー
   final valueUserNameController = TextEditingController();
 
+  // 問題作成時に番号が被らないようにする
+  bool dupFlg = false;
+  int tempNum;
+
+
   // ユーザ情報を削除するメソッド
   void userRemove(int userId,String userName){
     _itemUser.removeAt(userId);
     _userNameList.remove(userName);
-    // TODO : foreach且つアロー演算子で記述する
     for(int i = 0; i < _itemUser.length; i++){
       _itemUser[i].userId = i;
     }
@@ -96,7 +100,6 @@ class _gameStartPageState extends State<gameStartPage> {
                           ),
                         )
                       else
-                        // TODO : 非活性にするとボタンが消える
                         MaterialButton(
                           height: _config.deviceHeight * 0.1,
                           minWidth: _config.deviceWidth * 0.1,
@@ -116,7 +119,7 @@ class _gameStartPageState extends State<gameStartPage> {
                 Text(
                   'User List',
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: _config.deviceWidth * 0.08,
                       color: Colors.grey
                   ),
                 ),
@@ -167,11 +170,25 @@ class _gameStartPageState extends State<gameStartPage> {
                         width: _config.deviceWidth * 0.4,
                         child: ElevatedButton(
                           onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(
+                            // 問題作成
+                            for(int i = 0; i < _gameMaster.life * 2 ; i++){
+                              while(!dupFlg){
+                                tempNum = math.Random().nextInt(_gameMaster.question.length);
+                                // 重複がない場合リストに追加
+                                if(!_gameMaster.questionSentenceList.contains(tempNum)){
+                                  _gameMaster.questionSentenceList.add(tempNum);
+                                  dupFlg = true;
+                                }
+                              }
+                              dupFlg = false;
+                            }
+                            // ここで過去の画面遷移を全て削除する
+                            Navigator.pushAndRemoveUntil(
+                                context,
                                 // 引数 : ユーザリスト、ユーザ番号(orderNo)、問題番号、残り体力
-                                builder: (context) => userCheckNumber(_itemUser,_gameMaster)
-                            ));
-
+                                MaterialPageRoute(builder: (context) => userCheckNumber(_itemUser, _gameMaster)),
+                                    (_) => false
+                            );
                           },
                           child: Text(
                               'START'
