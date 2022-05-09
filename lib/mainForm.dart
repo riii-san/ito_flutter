@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ito/gameEnd.dart';
+import 'package:ito/tutorial.dart';
 import 'config.dart';
 import 'gameStartPage.dart';
 
@@ -41,7 +41,7 @@ class mainForm extends StatelessWidget{
                 Navigator.push(context, MaterialPageRoute(
                   // TODO : Tutorialページへ
                   // debug ゲームエンドページへ
-                  builder: (context) => gameEnd(true)
+                  builder: (context) => tutorial()
                 ));
               },
                 child: FittedBox(
