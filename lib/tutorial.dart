@@ -23,7 +23,7 @@ class tutorial extends StatelessWidget{
             child: Column(
               children: <Widget>[
 
-                SizedBox(height: _config.deviceHeight * 0.05,),
+                //SizedBox(height: _config.deviceHeight * 0.05,),
                 Container(
                     width: double.infinity,
                     // decoration: BoxDecoration(
@@ -74,7 +74,6 @@ class tutorial extends StatelessWidget{
                           final color = ColorTween(
                             begin: Colors.transparent,
                             end: Colors.black, // ブラックアウト
-                            // end: Colors.white, // ホワイトアウト
                           ).animate(CurvedAnimation(
                             parent: animation,
                             // 前半

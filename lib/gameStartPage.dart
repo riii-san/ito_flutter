@@ -48,6 +48,7 @@ class _gameStartPageState extends State<gameStartPage> {
   Widget build(BuildContext context) {
     config _config = new config(context);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         body : Center(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
